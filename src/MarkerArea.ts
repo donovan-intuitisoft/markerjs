@@ -19,17 +19,17 @@ import PointerIcon from "./assets/core-toolbar-icons/mouse-pointer.svg";
 import CloseIcon from "./assets/core-toolbar-icons/times.svg";
 
 import Logo from "./assets/markerjs-logo-m.svg";
-import Config, { MarkerColors } from './Config';
-import { EllipseMarkerToolbarItem } from './markers/ellipse/EllipseMarkerToolbarItem';
-import { MarkerAreaState } from './MarkerAreaState';
-import { MarkerBaseState } from './markers/MarkerBaseState';
-import { RectMarker } from './markers/rect/RectMarker';
-import { EllipseMarker } from './markers/ellipse/EllipseMarker';
-import { CoverMarker } from './markers/cover/CoverMarker';
-import { HighlightMarker } from './markers/highlight/HighlightMarker';
-import { TextMarker } from './markers/text/TextMarker';
-import { LineMarker } from './markers/line/LineMarker';
-import { ArrowMarker } from './markers/arrow/ArrowMarker';
+import Config, { MarkerColors } from "./Config";
+import { MarkerAreaState } from "./MarkerAreaState";
+import { ArrowMarker } from "./markers/arrow/ArrowMarker";
+import { CoverMarker } from "./markers/cover/CoverMarker";
+import { EllipseMarker } from "./markers/ellipse/EllipseMarker";
+import { EllipseMarkerToolbarItem } from "./markers/ellipse/EllipseMarkerToolbarItem";
+import { HighlightMarker } from "./markers/highlight/HighlightMarker";
+import { LineMarker } from "./markers/line/LineMarker";
+import { MarkerBaseState } from "./markers/MarkerBaseState";
+import { RectMarker } from "./markers/rect/RectMarker";
+import { TextMarker } from "./markers/text/TextMarker";
 
 export class MarkerArea {
     private target: HTMLImageElement;
@@ -108,9 +108,9 @@ export class MarkerArea {
         this.targetRoot = config && config.targetRoot ? config.targetRoot : document.body;
         this.renderAtNaturalSize = config && config.renderAtNaturalSize !== undefined ? config.renderAtNaturalSize : false;
         this.markerColors = {
-            mainColor: config && config.markerColors && config.markerColors.mainColor ? config.markerColors.mainColor : '#ff0000',
-            highlightColor: config && config.markerColors && config.markerColors.highlightColor ? config.markerColors.highlightColor : '#ffff00',
-            coverColor: config && config.markerColors && config.markerColors.coverColor ? config.markerColors.coverColor : '#000000'
+            mainColor: config && config.markerColors && config.markerColors.mainColor ? config.markerColors.mainColor : "#ff0000",
+            highlightColor: config && config.markerColors && config.markerColors.highlightColor ? config.markerColors.highlightColor : "#ffff00",
+            coverColor: config && config.markerColors && config.markerColors.coverColor ? config.markerColors.coverColor : "#000000",
         };
         this.strokeWidth = config && config.strokeWidth ? config.strokeWidth : 3;
         if (config && config.renderImageType) {
@@ -151,8 +151,8 @@ export class MarkerArea {
             this.restoreState();
         }
         if (!Activator.isLicensed) {
-            
-            // NOTE: 
+
+            // NOTE:
             // before removing this call please consider supporting marker.js
             // by visiting https://markerjs.com/#price for details
             // thank you!
@@ -160,46 +160,6 @@ export class MarkerArea {
         }
 
         window.addEventListener("resize", this.adjustUI);
-    }
-
-    private restoreState = () => {
-        if (this.previousState) {
-            this.previousState.markers.forEach(markerState => {
-                switch (markerState.markerType) {
-                    case 'RectMarker': {
-                        this.addMarker(RectMarker, markerState);
-                        break;
-                    }
-                    case 'EllipseMarker': {
-                        this.addMarker(EllipseMarker, markerState);
-                        break;
-                    }
-                    case 'CoverMarker': {
-                        this.addMarker(CoverMarker, markerState);
-                        break;
-                    }
-                    case 'HighlightMarker': {
-                        this.addMarker(HighlightMarker, markerState);
-                        break;
-                    }
-                    case 'TextMarker': {
-                        this.addMarker(TextMarker, markerState);
-                        break;
-                    }
-                    case 'LineMarker': {
-                        this.addMarker(LineMarker, markerState);
-                        break;
-                    }
-                    case 'ArrowMarker': {
-                        this.addMarker(ArrowMarker, markerState);
-                        break;
-                    }
-                    default: {
-                        console.log(`missing marker type state handler: ${markerState.markerType}`);
-                    }
-                }
-            })
-        }
     }
 
     public render = (completeCallback: (dataUrl: string, state?: MarkerAreaState) => void, cancelCallback?: () => void) => {
@@ -223,8 +183,8 @@ export class MarkerArea {
     }
 
     public addMarker = (
-        markerType: typeof MarkerBase, 
-        previousState?: MarkerBaseState
+        markerType: typeof MarkerBase,
+        previousState?: MarkerBaseState,
     ) => {
         const marker = markerType.createMarker();
         marker.onSelected = this.selectMarker;
@@ -236,7 +196,7 @@ export class MarkerArea {
                 }
             }
         }
-        
+
         this.markers.push(marker);
         this.selectMarker(marker);
 
@@ -262,8 +222,48 @@ export class MarkerArea {
     }
 
     public getState = (): MarkerAreaState => {
-        let config = new MarkerAreaState(this.markers);
+        const config = new MarkerAreaState(this.markers);
         return config;
+    }
+
+    private restoreState = () => {
+        if (this.previousState) {
+            this.previousState.markers.forEach((markerState) => {
+                switch (markerState.markerType) {
+                    case "RectMarker": {
+                        this.addMarker(RectMarker, markerState);
+                        break;
+                    }
+                    case "EllipseMarker": {
+                        this.addMarker(EllipseMarker, markerState);
+                        break;
+                    }
+                    case "CoverMarker": {
+                        this.addMarker(CoverMarker, markerState);
+                        break;
+                    }
+                    case "HighlightMarker": {
+                        this.addMarker(HighlightMarker, markerState);
+                        break;
+                    }
+                    case "TextMarker": {
+                        this.addMarker(TextMarker, markerState);
+                        break;
+                    }
+                    case "LineMarker": {
+                        this.addMarker(LineMarker, markerState);
+                        break;
+                    }
+                    case "ArrowMarker": {
+                        this.addMarker(ArrowMarker, markerState);
+                        break;
+                    }
+                    default: {
+                        console.log(`missing marker type state handler: ${markerState.markerType}`);
+                    }
+                }
+            });
+        }
     }
 
     private setTargetRect = () => {
@@ -276,7 +276,7 @@ export class MarkerArea {
 
     private startRender = (done: (dataUrl: string) => void) => {
         const renderer = new Renderer();
-        renderer.rasterize(this.target, this.markerImage, done, 
+        renderer.rasterize(this.target, this.markerImage, done,
             this.renderAtNaturalSize, this.renderImageType, this.renderImageQuality, this.renderMarkersOnly);
     }
 
@@ -518,11 +518,11 @@ export class MarkerArea {
     }
 
     /**
-     * NOTE: 
-     * 
+     * NOTE:
+     *
      * before removing or modifying this method please consider supporting marker.js
      * by visiting https://markerjs.com/#price for details
-     * 
+     *
      * thank you!
      */
     private addLogo = () => {
