@@ -228,7 +228,7 @@ export class MarkerArea {
     };
 
     public getActiveMarkerState() {
-        return this.activeMarker.getState();
+        return this.activeMarker ? this.activeMarker.getState() : null;
     }
 
     public getState = (): MarkerAreaState => {
@@ -288,7 +288,8 @@ export class MarkerArea {
 
     private startRender = (done: (dataUrl: string) => void) => {
         const renderer = new Renderer();
-        renderer.rasterize(this.target,
+        renderer.rasterize(
+            this.target,
             this.markerImage,
             done,
             this.renderAtNaturalSize,
