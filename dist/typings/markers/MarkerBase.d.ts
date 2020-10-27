@@ -8,6 +8,7 @@ export declare class MarkerBase {
     defs: SVGElement[];
     protected width: number;
     protected height: number;
+    protected color: string;
     protected isActive: boolean;
     protected isResizing: boolean;
     protected previousMouseX: number;

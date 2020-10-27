@@ -1,7 +1,7 @@
-import { MarkerBase } from "./markers/MarkerBase";
-import Config from "./Config";
-import { MarkerAreaState } from "./MarkerAreaState";
-import { MarkerBaseState } from "./markers/MarkerBaseState";
+import { MarkerBase } from './markers/MarkerBase';
+import Config from './Config';
+import { MarkerAreaState } from './MarkerAreaState';
+import { MarkerBaseState } from './markers/MarkerBaseState';
 export declare class MarkerArea {
     private target;
     private targetRoot;
@@ -34,6 +34,7 @@ export declare class MarkerArea {
     close: () => void;
     addMarker: (markerType: typeof MarkerBase, previousState?: MarkerBaseState) => void;
     deleteActiveMarker: () => void;
+    getActiveMarkerState(): MarkerBaseState;
     getState: () => MarkerAreaState;
     private restoreState;
     private setTargetRect;
