@@ -228,7 +228,7 @@ export class MarkerArea {
     };
 
     public getActiveMarkerState() {
-        return this.activeMarker ? this.activeMarker.getState() : null;
+        return this.activeMarker.getState();
     }
 
     public getState = (): MarkerAreaState => {
