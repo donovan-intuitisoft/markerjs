@@ -130,7 +130,6 @@ export class MarkerArea {
 
         this.markers = [];
         this.activeMarker = null;
-        this.adjustUI();
     }
 
     public show = (
