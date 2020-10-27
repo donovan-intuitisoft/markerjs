@@ -98,6 +98,7 @@ export class MarkerBase {
     public restoreState(state: MarkerBaseState) {
         this.width = state.width;
         this.height = state.height;
+        this.color = state.color;
 
         this.resize(state.width, state.height);
 
