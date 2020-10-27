@@ -130,11 +130,12 @@ export class MarkerArea {
 
         this.markers = [];
         this.activeMarker = null;
+        this.adjustUI();
     }
 
     public show = (
         completeCallback: (dataUrl: string, state?: MarkerAreaState) => void,
-        cancelCallback?: () => void
+        cancelCallback?: () => void,
     ) => {
         this.completeCallback = completeCallback;
         this.cancelCallback = cancelCallback;
@@ -167,7 +168,7 @@ export class MarkerArea {
 
     public render = (
         completeCallback: (dataUrl: string, state?: MarkerAreaState) => void,
-        cancelCallback?: () => void
+        cancelCallback?: () => void,
     ) => {
         this.completeCallback = completeCallback;
         this.cancelCallback = cancelCallback;
@@ -281,7 +282,7 @@ export class MarkerArea {
         const bodyRect = this.targetRoot.parentElement.getBoundingClientRect();
         this.targetRect = {
             left: (targetRect.left - bodyRect.left),
-            top: (targetRect.top - bodyRect.top)
+            top: (targetRect.top - bodyRect.top),
         } as ClientRect;
 
     };
@@ -295,7 +296,7 @@ export class MarkerArea {
             this.renderAtNaturalSize,
             this.renderImageType,
             this.renderImageQuality,
-            this.renderMarkersOnly
+            this.renderMarkersOnly,
         );
     };
 
@@ -340,7 +341,7 @@ export class MarkerArea {
         this.markerImage.setAttribute('height', this.height.toString());
         this.markerImage.setAttribute(
             'viewBox',
-            '0 0 ' + this.width.toString() + ' ' + this.height.toString()
+            '0 0 ' + this.width.toString() + ' ' + this.height.toString(),
         );
 
         this.markerImageHolder.style.position = 'absolute';
@@ -357,7 +358,7 @@ export class MarkerArea {
         this.targetRoot.appendChild(this.markerImageHolder);
     };
 
-    private adjustUI = (ev: UIEvent) => {
+    private adjustUI = (ev?: UIEvent) => {
         this.adjustSize();
         this.positionUI();
     };
