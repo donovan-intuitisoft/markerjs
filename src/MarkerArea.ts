@@ -18,6 +18,7 @@ import DeleteIcon from './assets/core-toolbar-icons/eraser.svg';
 import PointerIcon from './assets/core-toolbar-icons/mouse-pointer.svg';
 import CloseIcon from './assets/core-toolbar-icons/times.svg';
 
+import { BehaviorSubject, Observable } from "rxjs";
 import Logo from './assets/markerjs-logo-m.svg';
 import Config, { MarkerColors } from './Config';
 import { MarkerAreaState } from './MarkerAreaState';
@@ -54,6 +55,7 @@ export class MarkerArea {
 
     private markers: MarkerBase[];
     private activeMarker: MarkerBase;
+    private activeMarkerObserver: BehaviorSubject<MarkerBase> = new BehaviorSubject(null);
 
     private toolbar: Toolbar;
     private toolbarUI: HTMLElement;
@@ -237,6 +239,10 @@ export class MarkerArea {
         return config;
     };
 
+    public getActiveMarker() {
+        return this.activeMarkerObserver.asObservable();
+    }
+
     private restoreState = () => {
         if (this.previousState) {
             this.previousState.markers.forEach((markerState) => {
@@ -375,22 +381,15 @@ export class MarkerArea {
 
             this.markerImageHolder.style.transform = `scale(${this.scale})`;
         }
-
-        console.log({ widht: this.width, height: this.height, scale });
-
     };
 
     private positionUI = () => {
-        console.log('setTargetRect - start');
         this.setTargetRect();
-        console.log('positionMarkerImage - start');
         this.positionMarkerImage();
-        console.log('positionToolbar - start');
         this.positionToolbar();
         if (this.logoUI) {
             this.positionLogo();
         }
-        console.log('positionUI - end');
     };
 
     private positionMarkerImage = () => {
@@ -507,6 +506,7 @@ export class MarkerArea {
             this.activeMarker.deselect();
         }
         this.activeMarker = marker;
+        this.activeMarkerObserver.next(this.activeMarker);
     };
 
     private deleteMarker = (marker: MarkerBase) => {
