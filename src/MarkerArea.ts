@@ -18,7 +18,7 @@ import DeleteIcon from './assets/core-toolbar-icons/eraser.svg';
 import PointerIcon from './assets/core-toolbar-icons/mouse-pointer.svg';
 import CloseIcon from './assets/core-toolbar-icons/times.svg';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from "rxjs";
 import Logo from './assets/markerjs-logo-m.svg';
 import Config, { MarkerColors } from './Config';
 import { MarkerAreaState } from './MarkerAreaState';
@@ -231,7 +231,12 @@ export class MarkerArea {
     };
 
     public getActiveMarkerState() {
-        return this.activeMarker.getState();
+        if (this.activeMarker) {
+            return this.activeMarker.getState();
+        } else {
+            return null;
+        }
+
     }
 
     public getState = (): MarkerAreaState => {

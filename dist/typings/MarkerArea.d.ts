@@ -1,5 +1,5 @@
 import { MarkerBase } from './markers/MarkerBase';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import Config from './Config';
 import { MarkerAreaState } from './MarkerAreaState';
 import { MarkerBaseState } from './markers/MarkerBaseState';
