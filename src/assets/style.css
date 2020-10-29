@@ -68,7 +68,7 @@
 
 .markerjs-text-editor {
     position: fixed;
-    z-index: 20000;
+    z-index: 100000;
     left: 0px;
     top: 0px;
     width: 100vw;

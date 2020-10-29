@@ -130,6 +130,7 @@ export class MarkerArea {
 
         this.markers = [];
         this.activeMarker = null;
+        // this.adjustUI();
     }
 
     public show = (
@@ -375,15 +376,21 @@ export class MarkerArea {
             this.markerImageHolder.style.transform = `scale(${this.scale})`;
         }
 
+        console.log({ widht: this.width, height: this.height, scale });
+
     };
 
     private positionUI = () => {
+        console.log('setTargetRect - start');
         this.setTargetRect();
+        console.log('positionMarkerImage - start');
         this.positionMarkerImage();
+        console.log('positionToolbar - start');
         this.positionToolbar();
         if (this.logoUI) {
             this.positionLogo();
         }
+        console.log('positionUI - end');
     };
 
     private positionMarkerImage = () => {
