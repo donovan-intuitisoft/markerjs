@@ -12,8 +12,16 @@ export class Renderer {
 
         if (naturalSize === true) {
             // scale to full image size
-            markerImage.width.baseVal.value = target.naturalWidth;
-            markerImage.height.baseVal.value = target.naturalHeight;
+
+            let width = target.naturalWidth;
+            let height = target.naturalHeight;
+            if (width > 1000) {
+                height = height / width * 1000;
+                width = 1000;
+            }
+
+            markerImage.width.baseVal.value = width;
+            markerImage.height.baseVal.value = height;
         }
 
         canvas.width = markerImage.width.baseVal.value;

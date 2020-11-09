@@ -19,7 +19,7 @@ export class MarkerBase {
 
     protected width: number = 200;
     protected height: number = 50;
-    protected color: string = "red";
+    protected color: string = "FF0000";
 
     protected isActive: boolean = true;
     protected isResizing: boolean = false;
