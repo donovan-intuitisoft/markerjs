@@ -5,4 +5,5 @@ export interface MarkerBaseState {
     translateX: number;
     translateY: number;
     color: string;
+    id: string;
 }

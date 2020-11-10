@@ -8,10 +8,12 @@ export class ArrowMarker extends LineMarkerBase {
         return marker;
     }
 
+    public id: string;
+
     constructor() {
         super();
         this.markerTypeName = 'ArrowMarker';
-    }    
+    }
 
     private readonly ARROW_SIZE = 6;
 
@@ -21,10 +23,11 @@ export class ArrowMarker extends LineMarkerBase {
 
         const tip = SvgHelper.createPolygon(`0,0 ${this.ARROW_SIZE},${this.ARROW_SIZE / 2} 0,${this.ARROW_SIZE}`,
             [["class", "arrow-marker-tip"]]);
-        this.defs.push(SvgHelper.createMarker("arrow-marker-head", "auto",
+        this.id = "arrow-marker-head-" + Date.now();
+        this.defs.push(SvgHelper.createMarker(this.id, "auto",
             this.ARROW_SIZE, this.ARROW_SIZE, this.ARROW_SIZE - 1, this.ARROW_SIZE / 2, tip));
 
-        this.markerLine.setAttribute("marker-end", "url(#arrow-marker-head)");
+        this.markerLine.setAttribute("marker-end", `url(#${this.id})`);
     }
 
 }

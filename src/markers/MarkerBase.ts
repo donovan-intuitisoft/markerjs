@@ -20,6 +20,7 @@ export class MarkerBase {
     protected width: number = 200;
     protected height: number = 50;
     protected color: string = "FF0000";
+    protected id: string = "id";
 
     protected isActive: boolean = true;
     protected isResizing: boolean = false;
@@ -89,7 +90,8 @@ export class MarkerBase {
             height: this.height,
             translateX: this.visual.transform.baseVal.getItem(0).matrix.e,
             translateY: this.visual.transform.baseVal.getItem(0).matrix.f,
-            color: this.color
+            color: this.color,
+            id: this.id
         };
 
         return config;

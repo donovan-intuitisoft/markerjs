@@ -9,6 +9,7 @@ export declare class MarkerBase {
     protected width: number;
     protected height: number;
     protected color: string;
+    protected id: string;
     protected isActive: boolean;
     protected isResizing: boolean;
     protected previousMouseX: number;
